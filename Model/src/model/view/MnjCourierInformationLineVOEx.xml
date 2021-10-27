@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MnjCourierInformationLineVOEx"
+  Version="11.1.1.62.29"
+  Extends="model.view.MnjCourierInformationLineVO"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.view.MnjCourierInformationLineVOEx_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="RESP_ID"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[adf.context.sessionScope.respId]]></TransientExpression>
+  </Variable>
+  <SQLQuery>
+    <![CDATA[SELECT MnjCourierInformationLineEO.COURIER_ID, 
+       MnjCourierInformationLineEO.HEADER_ID, 
+       MnjCourierInformationLineEO.AWB_ID, 
+       MnjCourierInformationLineEO.COURIER_NAME, 
+       MnjCourierInformationLineEO.IMPORT_EXPORT, 
+       MnjCourierInformationLineEO.COURIER_DATE, 
+       MnjCourierInformationLineEO.BUYER, 
+       MnjCourierInformationLineEO.BUYER_ID, 
+       MnjCourierInformationLineEO.DEV_SAMPLE_BULK, 
+       MnjCourierInformationLineEO.UNIT, 
+       MnjCourierInformationLineEO.SENDER_UNIT, 
+       MnjCourierInformationLineEO.DELIVERY_LOCATION, 
+       MnjCourierInformationLineEO.USER_NAME, 
+       MnjCourierInformationLineEO.SEASON, 
+       MnjCourierInformationLineEO.STYLE_NUMBER, 
+       MnjCourierInformationLineEO.BPO_NUMBER, 
+       MnjCourierInformationLineEO.ITEM_CODE, 
+       MnjCourierInformationLineEO.QTY, 
+       MnjCourierInformationLineEO.DOC_RCVD_DATE, 
+       MnjCourierInformationLineEO.EXPECTED_DELIVERY_DATE, 
+       MnjCourierInformationLineEO.ACTUAL_DELIVERY_DATE, 
+       MnjCourierInformationLineEO.ORG_ID, 
+       MnjCourierInformationLineEO.SAMPLE_DOC_NO, 
+       MnjCourierInformationLineEO.VERSION_NO, 
+       MnjCourierInformationLineEO.VERSION_DATE, 
+       MnjCourierInformationLineEO.RESP_ID, 
+       MnjCourierInformationLineEO.USER_ID, 
+       MnjCourierInformationLineEO.CREATION_DATE, 
+       MnjCourierInformationLineEO.CREATED_BY,
+       (SELECT USER_NAME FROM FND_USER WHERE USER_ID = MnjCourierInformationLineEO.CREATED_BY) CREATOR_NAME, 
+       MnjCourierInformationLineEO.LAST_UPDATE_DATE, 
+       MnjCourierInformationLineEO.LAST_UPDATED_BY,
+       (SELECT USER_NAME FROM FND_USER WHERE USER_ID = MnjCourierInformationLineEO.LAST_UPDATED_BY) UPDATER_NAME,
+       MnjCourierInformationLineEO.UOM, 
+       MnjCourierInformationLineEO.KNOW_STYLE, 
+       MnjCourierInformationLineEO.CONCIGNEE_UNIT, 
+       MnjCourierInformationLineEO.PAYEE_UNIT, 
+       MnjCourierInformationLineEO.SUPPLIER_COUNTRY, 
+       MnjCourierInformationLineEO.VALUE_PRICE, 
+       MnjCourierInformationLineEO.INVOICE_NO, 
+       MnjCourierInformationLineEO.INVOICE_DATE, 
+       MnjCourierInformationLineEO.CURRENCY, 
+       MnjCourierInformationLineEO.WEIGHT, 
+       MnjCourierInformationLineEO.WEIGHT_TYPE, 
+       MnjCourierInformationLineEO.PACKAGE_QTY, 
+       MnjCourierInformationLineEO.ITEM, 
+       MnjCourierInformationLineEO.UD_NO, 
+       MnjCourierInformationLineEO.EXPORT_LC_NO, 
+       MnjCourierInformationLineEO.CNF_AGENT_NAME, 
+       MnjCourierInformationLineEO.DOC_HANDOVER_DATE, 
+       MnjCourierInformationLineEO.DELIVERY_DATE, 
+       MnjCourierInformationLineEO.REMARKS,
+       MnjCourierInformationLineEO.REMARKS_COMMERCIAL,
+       MnjCourierInformationLineEO.NEED_DETAILS,
+       MnjCourierInformationLineEO.NEED_DETAILS_COMMERCIAL,
+       MnjCourierInformationLineEO.COMPLETION_FLAG,
+       MnjCourierInformationLineEO.PROCESS_INDICATOR_FLAG,
+       MnjCourierInformationLineEO.COMPLETION_FLAG_COMMERCIAL,
+       MnjCourierInformationLineEO.PROCESS_INDICATOR_COMMER_FLAG,
+       MnjCourierInformationLineEO.MERCHANT_RECEIVED_BY,
+       MnjCourierInformationLineEO.QTY_YARD
+
+
+FROM MNJ_COURIER_INFORMATION_LINE MnjCourierInformationLineEO
+WHERE 1=1
+AND ((:RESP_ID = 51318 AND MnjCourierInformationLineEO.COMPLETION_FLAG_COMMERCIAL = 'Yes')
+        OR  
+     ((:RESP_ID = 51159 OR :RESP_ID = 52666)   
+     AND MnjCourierInformationLineEO.COMPLETION_FLAG = 'Yes'))
+order by MnjCourierInformationLineEO.courier_id desc]]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="CreatorName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CREATOR_NAME"
+    Expression="CREATOR_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+      <Attr Name="_OverrideAttr" Value="true"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="UpdaterName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UPDATER_NAME"
+    Expression="UPDATER_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+      <Attr Name="_OverrideAttr" Value="true"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Serial"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_OverrideAttr" Value="true"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

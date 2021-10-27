@@ -1,0 +1,912 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f2">
+        <af:panelHeader text="MJ-Courier Management Completed" id="ph1"
+                        icon="/icons/check_sign_icon_green.png">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:panelGroupLayout id="pgl1" layout="horizontal">
+            <af:panelFormLayout id="pfl1"
+                                inlineStyle=" width:500px;"
+                                rows="2">
+              <af:panelLabelAndMessage label="Courier Doc No:" id="plam4">
+                <af:outputText value="#{bindings.DocNo.inputValue}" id="ot4"
+                               inlineStyle="font-weight:bold;">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.DocNo.format}"/>
+                </af:outputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="Courier Type:" id="plam1">
+                <af:outputText value="#{bindings.ImportExport.inputValue}"
+                               id="ot1" inlineStyle="font-weight:bold;"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="Creation Date:" id="plam2">
+                <af:outputText value="#{bindings.CreationDate.inputValue}"
+                               id="ot3" inlineStyle="font-weight:bold;">
+                  <af:convertDateTime pattern="#{bindings.CreationDate.format}"/>
+                </af:outputText>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="Creator Name:" id="plam3">
+                <af:outputText value="#{bindings.CreatorName.inputValue}"
+                               id="ot2" inlineStyle="font-weight:bold;"/>
+              </af:panelLabelAndMessage>
+            </af:panelFormLayout>
+            <af:spacer width="20" height="20" id="s1"/>
+            <af:commandImageLink text="Back" id="cil1" icon="/icons/go back.jpg"
+                                 action="*returnHomePG"/>
+            <af:spacer width="15" height="20" id="s2"/>
+            <af:spacer width="15" height="20" id="s3"/>
+          </af:panelGroupLayout>
+        </af:panelHeader>
+        <af:panelTabbed id="pt1" styleClass="AFStretchWidth"
+                        dimensionsFrom="auto">
+          <af:showDetailItem text="Import" id="sdi1"
+                             visible="#{bindings.ImportExport== 'Import'  or bindings.ImportExport== 'Both' ? 'true' : 'false' }">
+            <af:panelHeader text="PD/ Merchant Panel" id="ph2"
+                            visible="#{sessionScope.respId=='51318'? 'false':'true'}">
+              <f:facet name="context"/>
+              <f:facet name="menuBar"/>
+              <f:facet name="toolbar"/>
+              <f:facet name="legend"/>
+              <f:facet name="info"/>
+              <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="statusbar"/>
+                <af:table value="#{bindings.MnjCourierInformationLineViewOnly1.collectionModel}"
+                          var="row"
+                          rows="#{bindings.MnjCourierInformationLineViewOnly1.rangeSize}"
+                          emptyText="#{bindings.MnjCourierInformationLineViewOnly1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.MnjCourierInformationLineViewOnly1.rangeSize}"
+                          rowBandingInterval="0"
+                          filterModel="#{bindings.MnjCourierInformationLineViewOnly1Query.queryDescriptor}"
+                          queryListener="#{bindings.MnjCourierInformationLineViewOnly1Query.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.MnjCourierInformationLineViewOnly1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.MnjCourierInformationLineViewOnly1.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t1" autoHeightRows="15"
+                          inlineStyle="height:350px;">
+                  <af:column headerText="Sl."
+                             id="c8" align="center" width="40">
+                    <af:outputText value="#{vs.index+1}" id="ot6"/>
+                  </af:column>
+                  <af:column id="c88" headerText="Status" align="center"
+                             width="135" frozen="true">
+                    <af:panelGroupLayout id="pgl2" layout="horizontal"
+                                         visible="#{row.ActualDeliveryDate == null ?'false' : 'true'}"
+                                         partialTriggers="ot95">
+                      <af:activeImage source="/icons/check_sign_icon_green.png"
+                                      id="ai1"/>
+                      <af:outputText value="Inhoused" id="ot96"
+                                     inlineStyle="font-weight:bold;"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="panelGroupLayout1"
+                                         layout="horizontal"
+                                         visible="#{row.ActualDeliveryDate == null ?'true' : 'false'}"
+                                         partialTriggers="ot95">
+                      <af:icon name="warning" id="i1"/>
+                      <af:activeOutputText value="Inhouse Pending" id="aot1"
+                                           inlineStyle="font-weight:bold;"/>
+                    </af:panelGroupLayout>
+                  </af:column>
+                  <af:column sortProperty="ImportExport" filterable="true"
+                             sortable="true"
+                             headerText="Courier Type"
+                             id="c12" align="center" width="82">
+                    <af:outputText value="#{row.ImportExport}" id="ot19"/>
+                  </af:column>
+                  <af:column headerText="Courier Name"
+                             id="c23" align="center" sortable="true"
+                             filterable="true" sortProperty="CourierName"
+                             width="155">
+                    <af:outputText value="#{row.CourierName}" id="ot27"/>
+                  </af:column>
+                  <af:column sortProperty="AwbId" filterable="true"
+                             sortable="true"
+                             headerText="AWB No."
+                             id="c17" align="center" width="205">
+                    <af:outputText value="#{row.AwbId}" id="ot5"
+                                   inlineStyle="font-weight:bold;"/>
+                  </af:column>
+                  <af:column sortProperty="CourierDate" filterable="true"
+                             sortable="true"
+                             headerText="AWB Date"
+                             id="c7" align="center" width="105">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.CourierDate}"
+                                    id="id1"/>
+                    </f:facet>
+                    <af:outputText value="#{row.CourierDate}" id="ot14">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationLineViewOnly1.hints.CourierDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="Buyer" filterable="true"
+                             sortable="true"
+                             headerText="Buyer"
+                             id="c18" align="center" width="155">
+                    <af:outputText value="#{row.Buyer}" id="ot11"
+                                   inlineStyle="font-weight:bold;"/>
+                  </af:column>
+                  <af:column sortProperty="Season" filterable="true"
+                             sortable="true"
+                             headerText="Season"
+                             id="c10" align="center" width="155">
+                    <af:outputText value="#{row.Season}" id="ot17"
+                                   inlineStyle="font-weight:bold;"/>
+                  </af:column>
+                  <af:column sortProperty="ConcigneeUnit" filterable="true"
+                             sortable="true"
+                             headerText="Unit"
+                             id="c3" align="center" width="105">
+                    <af:outputText value="#{row.ConcigneeUnit}" id="ot7"/>
+                  </af:column>
+                  <af:column sortProperty="PayeeUnit" filterable="true"
+                             sortable="true"
+                             headerText="Payee"
+                             id="c11" align="center" width="105">
+                    <af:outputText value="#{row.PayeeUnit}" id="ot12"/>
+                  </af:column>
+                  <af:column sortProperty="SenderUnit" filterable="true"
+                             sortable="true"
+                             headerText="Supplier"
+                             id="c9" align="center" width="255">
+                    <af:outputText value="#{row.SenderUnit}" id="ot24"/>
+                  </af:column>
+                  <af:column sortProperty="SupplierCountry" filterable="true"
+                             sortable="true"
+                             headerText="Supplier Country"
+                             id="c1" align="center" width="105">
+                    <af:outputText value="#{row.SupplierCountry}" id="ot20"/>
+                  </af:column>
+                  <af:column sortProperty="DeliveryLocation" filterable="true"
+                             sortable="true"
+                             headerText="Receiver Location"
+                             id="c6" align="center" width="105">
+                    <af:outputText value="#{row.DeliveryLocation}" id="ot13"/>
+                  </af:column>
+                  <af:column sortProperty="ItemCode" filterable="true"
+                             sortable="true"
+                             headerText="Item Category"
+                             id="c15" align="center" width="105">
+                    <af:outputText value="#{row.ItemCode}" id="ot22"/>
+                  </af:column>
+                  <af:column sortProperty="Item" filterable="true"
+                             sortable="true"
+                             headerText="Item Description"
+                             id="c13" align="center" width="205">
+                    <af:outputText value="#{row.Item}" id="ot10"/>
+                  </af:column>
+                  <af:column sortProperty="DevSampleBulk" filterable="true"
+                             sortable="true"
+                             headerText="Purpose"
+                             id="c16" align="center" width="105">
+                    <af:outputText value="#{row.DevSampleBulk}" id="ot16"/>
+                  </af:column>
+                  <af:column headerText="Receiver Merchant/ PD Name"
+                             id="c22" align="center"
+                             sortProperty="MerchantReceivedBy" sortable="true"
+                             filterable="true" width="155">
+                    <af:outputText value="#{row.MerchantReceivedBy}" id="ot26"/>
+                  </af:column>
+                  <af:column sortProperty="Qty" filterable="true"
+                             sortable="true"
+                             headerText="Qty"
+                             id="c2" align="center" width="60">
+                    <af:outputText value="#{row.Qty}" id="ot23">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.MnjCourierInformationLineViewOnly1.hints.Qty.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="Uom" filterable="true"
+                             sortable="true"
+                             headerText="UOM"
+                             id="c21" align="center" width="105">
+                    <af:outputText value="#{row.Uom}" id="ot18"/>
+                  </af:column>
+                  <af:column sortProperty="ValuePrice" filterable="true"
+                             sortable="true"
+                             headerText="Value/ Price"
+                             id="c5" align="center" width="75">
+                    <af:outputText value="#{row.ValuePrice}" id="ot15">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.MnjCourierInformationLineViewOnly1.hints.ValuePrice.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="Remarks" filterable="true"
+                             sortable="true"
+                             headerText="Remarks"
+                             id="c14" align="center" width="205">
+                    <af:outputText value="#{row.Remarks}" id="ot25"/>
+                  </af:column>
+                  <af:column id="c89" headerText="From Commercial Panel"
+                             align="center"
+                             width="645">
+                    <af:column headerText="Doc Received Date" id="c90"
+                               align="center" sortable="true" filterable="false"
+                               width="175" sortProperty="DocRcvdDate"
+                               inlineStyle="font-weight:bold;background-color:rgb(234,249,255)">
+                      <af:outputText value="#{row.DocRcvdDate}" id="ot92">
+                        <af:convertDateTime pattern="#{bindings.MnjCourierInformationLineViewOnly1.hints.DocRcvdDate.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column headerText="Doc Handover Date" id="c91"
+                               align="center" sortable="true" filterable="false"
+                               width="175" sortProperty="DocHandoverDate"
+                               inlineStyle="font-weight:bold;background-color:rgb(234,249,255)">
+                      <af:outputText value="#{row.DocHandoverDate}" id="ot93">
+                        <af:convertDateTime pattern="#{bindings.MnjCourierInformationLineViewOnly1.hints.DocHandoverDate.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column headerText="Expected Delivery Date" id="c92"
+                               align="center" sortable="true" filterable="false"
+                               sortProperty="ExpectedDeliveryDate"
+                               inlineStyle="font-weight:bold;background-color:rgb(234,249,255)">
+                      <af:outputText value="#{row.ExpectedDeliveryDate}"
+                                     id="ot94">
+                        <af:convertDateTime pattern="#{bindings.MnjCourierInformationLineViewOnly1.hints.ExpectedDeliveryDate.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column headerText="Actual Delivery Date" id="c93"
+                               align="center" sortable="true" filterable="false"
+                               width="175" sortProperty="ActualDeliveryDate"
+                               inlineStyle="font-weight:bold;background-color:rgb(234,249,255)">
+                      <af:outputText value="#{row.ActualDeliveryDate}"
+                                     id="ot95">
+                        <af:convertDateTime pattern="#{bindings.MnjCourierInformationLineViewOnly1.hints.ActualDeliveryDate.format}"/>
+                      </af:outputText>
+                    </af:column>
+                  </af:column>
+                  <af:column sortProperty="CreationDate" filterable="true"
+                             sortable="true"
+                             headerText="Creation Date"
+                             id="c19" align="center" width="105">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.CreationDate}"
+                                    id="id2"/>
+                    </f:facet>
+                    <af:outputText value="#{row.CreationDate}" id="ot21">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationLineViewOnly1.hints.CreationDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column headerText="Creator Name"
+                             id="c24" align="center" sortable="true"
+                             filterable="true" sortProperty="CreatorName"
+                             width="155">
+                    <af:outputText value="#{row.CreatorName}" id="ot28"/>
+                  </af:column>
+                  <af:column sortProperty="LastUpdateDate" filterable="true"
+                             sortable="true"
+                             headerText="Last Update Date"
+                             id="c4" align="center" width="105">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.LastUpdateDate}"
+                                    id="id3"/>
+                    </f:facet>
+                    <af:outputText value="#{row.LastUpdateDate}" id="ot9">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationLineViewOnly1.hints.LastUpdateDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column headerText="Updater Name"
+                             id="c25" align="center" sortable="true"
+                             filterable="true" sortProperty="UpdaterName"
+                             width="155">
+                    <af:outputText value="#{row.UpdaterName}" id="ot29"/>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </af:panelHeader>
+            <af:panelHeader text="Commercial Panel" id="ph3"
+                            visible="#{sessionScope.respId=='51159' or sessionScope.respId=='52666' ? 'false':'true'}">
+              <f:facet name="context"/>
+              <f:facet name="menuBar"/>
+              <f:facet name="toolbar"/>
+              <f:facet name="legend"/>
+              <f:facet name="info"/>
+              <af:panelCollection id="pc2" styleClass="AFStretchWidth">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="statusbar"/>
+                <af:table value="#{bindings.MnjCourierInformationLineViewOnly11.collectionModel}"
+                          var="row"
+                          rows="#{bindings.MnjCourierInformationLineViewOnly11.rangeSize}"
+                          emptyText="#{bindings.MnjCourierInformationLineViewOnly11.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.MnjCourierInformationLineViewOnly11.rangeSize}"
+                          rowBandingInterval="0"
+                          filterModel="#{bindings.MnjCourierInformationLineViewOnly1Query.queryDescriptor}"
+                          queryListener="#{bindings.MnjCourierInformationLineViewOnly1Query.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.MnjCourierInformationLineViewOnly11.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.MnjCourierInformationLineViewOnly11.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t2" autoHeightRows="15"
+                          inlineStyle="height:350px;">
+                  <af:column sortProperty="Serial"
+                             sortable="true"
+                             headerText="Sl."
+                             id="c38" align="center" width="35">
+                    <af:outputText value="#{vs.index+1}" id="ot8"/>
+                  </af:column>
+                  <af:column id="c94" headerText="Status" align="center"
+                             width="135" frozen="true">
+                    <af:panelGroupLayout id="panelGroupLayout2"
+                                         layout="horizontal"
+                                         visible="#{row.ActualDeliveryDate == null ?'false' : 'true'}"
+                                         partialTriggers="ot63">
+                      <af:activeImage source="/icons/check_sign_icon_green.png"
+                                      id="activeImage1"/>
+                      <af:outputText value="Inhoused" id="outputText1"
+                                     inlineStyle="font-weight:bold;"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="panelGroupLayout3"
+                                         layout="horizontal"
+                                         visible="#{row.ActualDeliveryDate == null ?'true' : 'false'}"
+                                         partialTriggers="ot63">
+                      <af:icon name="warning" id="icon1"/>
+                      <af:activeOutputText value="Inhouse Pending"
+                                           id="activeOutputText1"
+                                           inlineStyle="font-weight:bold;"/>
+                    </af:panelGroupLayout>
+                  </af:column>
+                  <af:column sortProperty="ImportExport" filterable="true"
+                             sortable="true"
+                             headerText="Courier Type"
+                             id="c42" align="center" width="75">
+                    <af:outputText value="#{row.ImportExport}" id="ot44"/>
+                  </af:column>
+                  <af:column sortProperty="ConcigneeUnit" filterable="true"
+                             sortable="true"
+                             headerText="Consignee Unit"
+                             id="c32" align="center" width="75">
+                    <af:outputText value="#{row.ConcigneeUnit}" id="ot53"/>
+                  </af:column>
+                  <af:column sortProperty="PayeeUnit" filterable="true"
+                             sortable="true"
+                             headerText="Payee Unit"
+                             id="c44" align="center" width="75">
+                    <af:outputText value="#{row.PayeeUnit}" id="ot40"/>
+                  </af:column>
+                  <af:column sortProperty="SenderUnit" filterable="true"
+                             sortable="true"
+                             headerText="Supplier"
+                             id="c33" align="center" width="250">
+                    <af:outputText value="#{row.SenderUnit}" id="ot48"/>
+                  </af:column>
+                  <af:column sortProperty="SupplierCountry" filterable="true"
+                             sortable="true"
+                             headerText="Supplier Country"
+                             id="c35" align="center">
+                    <af:outputText value="#{row.SupplierCountry}" id="ot51"/>
+                  </af:column>
+                  <af:column sortProperty="CourierName" filterable="true"
+                             sortable="true"
+                             headerText="Courier Name"
+                             id="c30" align="center" width="150">
+                    <af:outputText value="#{row.CourierName}" id="ot55"/>
+                  </af:column>
+                  <af:column sortProperty="AwbId" filterable="true"
+                             sortable="true"
+                             headerText="AWB No."
+                             id="c28" align="center" width="200">
+                    <af:outputText value="#{row.AwbId}" id="ot60"
+                                   inlineStyle="font-weight:bold;"/>
+                  </af:column>
+                  <af:column sortProperty="CourierDate" filterable="true"
+                             sortable="true"
+                             headerText="AWB Date"
+                             id="c47" align="center">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.CourierDate}"
+                                    id="id11"/>
+                    </f:facet>
+                    <af:outputText value="#{row.CourierDate}" id="ot61">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationLineViewOnly11.hints.CourierDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="ItemCode" filterable="true"
+                             sortable="true"
+                             headerText="Item Category"
+                             id="c56" align="center">
+                    <af:outputText value="#{row.ItemCode}" id="ot30"/>
+                  </af:column>
+                  <af:column sortProperty="Item" filterable="true"
+                             sortable="true"
+                             headerText="Item Description"
+                             id="c57" align="center" width="200">
+                    <af:outputText value="#{row.Item}" id="ot54"/>
+                  </af:column>
+                  <af:column sortProperty="InvoiceNo" filterable="true"
+                             sortable="true"
+                             headerText="Invoice No."
+                             id="c45" align="center" width="150">
+                    <af:outputText value="#{row.InvoiceNo}" id="ot46"/>
+                  </af:column>
+                  <af:column sortProperty="InvoiceDate" filterable="true"
+                             sortable="true"
+                             headerText="Invoice Date"
+                             id="c41" align="center">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.InvoiceDate}"
+                                    id="id10"/>
+                    </f:facet>
+                    <af:outputText value="#{row.InvoiceDate}" id="ot62">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationLineViewOnly11.hints.InvoiceDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="Currency" filterable="true"
+                             sortable="true"
+                             headerText="Currency"
+                             id="c20" align="center">
+                    <af:outputText value="#{row.Currency}" id="ot52"/>
+                  </af:column>
+                  <af:column sortProperty="ValuePrice" filterable="true"
+                             sortable="true"
+                             headerText="Value/ Price"
+                             id="c34" align="center" width="75">
+                    <af:outputText value="#{row.ValuePrice}" id="ot34">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.MnjCourierInformationLineViewOnly11.hints.ValuePrice.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="PackageQty" filterable="true"
+                             sortable="true"
+                             id="c48" align="center"
+                             headerText="CTN/ ROLL/ PKT" width="50">
+                    <af:outputText value="#{row.PackageQty}" id="ot57">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.MnjCourierInformationLineViewOnly11.hints.PackageQty.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="Weight" filterable="true"
+                             sortable="true"
+                             headerText="Weight in KGS"
+                             id="c53" align="center" width="60">
+                    <af:outputText value="#{row.Weight}" id="ot43">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.MnjCourierInformationLineViewOnly11.hints.Weight.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="Qty" filterable="true"
+                             sortable="true"
+                             headerText="Qty"
+                             id="c26" align="center" width="60">
+                    <af:outputText value="#{row.Qty}" id="ot37">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.MnjCourierInformationLineViewOnly11.hints.Qty.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="Uom" filterable="true"
+                             sortable="true"
+                             headerText="UOM"
+                             id="c49" align="center" width="80">
+                    <af:outputText value="#{row.Uom}" id="ot32"/>
+                  </af:column>
+                  <af:column sortProperty="QtyYard" filterable="true"
+                             sortable="true"
+                             headerText="Qty in YDS"
+                             id="c39" align="center" width="60">
+                    <af:outputText value="#{row.QtyYard}" id="ot39">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.MnjCourierInformationLineViewOnly11.hints.QtyYard.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="DocRcvdDate" filterable="true"
+                             sortable="true"
+                             headerText="Doc Received Date"
+                             id="c31" align="center" width="200"
+                             inlineStyle="background-color:rgb(234,249,255)">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.DocRcvdDate}"
+                                    id="id5" contentStyle="width:160px;"/>
+                    </f:facet>
+                    <af:outputText value="#{row.DocRcvdDate}" id="ot41"
+                                   inlineStyle="font-weight:bold;">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationLineViewOnly11.hints.DocRcvdDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="DocHandoverDate" filterable="true"
+                             sortable="true"
+                             id="c58" align="center" width="200"
+                             headerText="Doc Handover Date"
+                             inlineStyle="background-color:rgb(234,249,255)">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.DocHandoverDate}"
+                                    id="id4" contentStyle="width:160px;"/>
+                    </f:facet>
+                    <af:outputText value="#{row.DocHandoverDate}" id="ot36"
+                                   inlineStyle="font-weight:bold;">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationLineViewOnly11.hints.DocHandoverDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="ExpectedDeliveryDate"
+                             filterable="true" sortable="true"
+                             headerText="Expected Delivery Date"
+                             id="c43" align="center"
+                             inlineStyle="background-color:rgb(234,249,255)">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.ExpectedDeliveryDate}"
+                                    id="id6"/>
+                    </f:facet>
+                    <af:outputText value="#{row.ExpectedDeliveryDate}"
+                                   id="ot33"
+                                   inlineStyle="font-weight:bold;">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationLineViewOnly11.hints.ExpectedDeliveryDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="ActualDeliveryDate" filterable="true"
+                             sortable="true"
+                             headerText="Actual Delivery Date"
+                             id="c51" align="center" width="200"
+                             inlineStyle="background-color:rgb(234,249,255)">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.ActualDeliveryDate}"
+                                    id="id8" contentStyle="width:160px;"/>
+                    </f:facet>
+                    <af:outputText value="#{row.ActualDeliveryDate}" id="ot63"
+                                   inlineStyle="font-weight:bold;">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationLineViewOnly11.hints.ActualDeliveryDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="UdNo" filterable="true"
+                             sortable="true"
+                             headerText="UD No."
+                             id="c50" align="center" width="200">
+                    <af:outputText value="#{row.UdNo}" id="ot42"/>
+                  </af:column>
+                  <af:column sortProperty="ExportLcNo" filterable="true"
+                             sortable="true"
+                             headerText="Export Contract No."
+                             id="c37" align="center" width="150">
+                    <af:outputText value="#{row.ExportLcNo}" id="ot35"/>
+                  </af:column>
+                  <af:column sortProperty="CnfAgentName" filterable="true"
+                             sortable="true"
+                             headerText="CNF Agent Name"
+                             id="c36" align="center" width="200">
+                    <af:outputText value="#{row.CnfAgentName}" id="ot59"/>
+                  </af:column>
+                  <af:column sortProperty="MerchantReceivedBy" filterable="true"
+                             sortable="true"
+                             headerText="Receiver Merchant/ PD Name"
+                             id="c46" align="center" width="150">
+                    <af:outputText value="#{row.MerchantReceivedBy}" id="ot58"/>
+                  </af:column>
+                  <af:column sortProperty="DeliveryLocation" filterable="true"
+                             sortable="true"
+                             headerText="Receiver Location"
+                             id="c40" align="center">
+                    <af:outputText value="#{row.DeliveryLocation}" id="ot56"/>
+                  </af:column>
+                  <af:column sortProperty="DevSampleBulk" filterable="true"
+                             sortable="true"
+                             headerText="Purpose"
+                             id="c54" align="center">
+                    <af:outputText value="#{row.DevSampleBulk}" id="ot31"/>
+                  </af:column>
+                  <af:column sortProperty="RemarksCommercial" filterable="true"
+                             sortable="true"
+                             headerText="Remarks"
+                             id="c52" align="center" width="200">
+                    <af:outputText value="#{row.RemarksCommercial}" id="ot50"/>
+                  </af:column>
+                  <af:column sortProperty="CreationDate" filterable="true"
+                             sortable="true"
+                             headerText="Creation Date"
+                             id="c59" align="center">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.CreationDate}"
+                                    id="id9"/>
+                    </f:facet>
+                    <af:outputText value="#{row.CreationDate}" id="ot47">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationLineViewOnly11.hints.CreationDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="CreatorName" filterable="true"
+                             sortable="true"
+                             headerText="Creator Name"
+                             id="c27" align="center">
+                    <af:outputText value="#{row.CreatorName}" id="ot38"/>
+                  </af:column>
+                  <af:column sortProperty="LastUpdateDate" filterable="true"
+                             sortable="true"
+                             headerText="Last Update Name"
+                             id="c29" align="center">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.LastUpdateDate}"
+                                    id="id7"/>
+                    </f:facet>
+                    <af:outputText value="#{row.LastUpdateDate}" id="ot45">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationLineViewOnly11.hints.LastUpdateDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="UpdaterName" filterable="true"
+                             sortable="true"
+                             headerText="Updater Name"
+                             id="c55" align="center">
+                    <af:outputText value="#{row.UpdaterName}" id="ot49"/>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </af:panelHeader>
+          </af:showDetailItem>
+          <af:showDetailItem text="Export" id="sdi2"
+                             visible="#{bindings.ImportExport== 'Export'  or bindings.ImportExport== 'Both' ? 'true' : 'false' }">
+            <af:panelHeader text="Export Header Panel" id="ph4">
+              <f:facet name="context"/>
+              <f:facet name="menuBar"/>
+              <f:facet name="toolbar"/>
+              <f:facet name="legend"/>
+              <f:facet name="info"/>
+              <af:panelCollection id="pc3" styleClass="AFStretchWidth">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="statusbar"/>
+                <af:table value="#{bindings.MnjCourierInformationLine2ViewOnly1.collectionModel}"
+                          var="row"
+                          rows="#{bindings.MnjCourierInformationLine2ViewOnly1.rangeSize}"
+                          emptyText="#{bindings.MnjCourierInformationLine2ViewOnly1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.MnjCourierInformationLine2ViewOnly1.rangeSize}"
+                          rowBandingInterval="0"
+                          filterModel="#{bindings.MnjCourierInformationLine2ViewOnly1Query.queryDescriptor}"
+                          queryListener="#{bindings.MnjCourierInformationLine2ViewOnly1Query.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.MnjCourierInformationLine2ViewOnly1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.MnjCourierInformationLine2ViewOnly1.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t3" autoHeightRows="10">
+                  <af:column sortProperty="Serial" filterable="true"
+                             sortable="true"
+                             headerText="Sl."
+                             id="c68" align="center" width="35">
+                    <af:outputText value="#{vs.index+1}" id="ot72"/>
+                  </af:column>
+                  <af:column sortProperty="ImportExport" filterable="true"
+                             sortable="true"
+                             headerText="Courier Type"
+                             id="c71" align="center" width="50">
+                    <af:outputText value="#{row.ImportExport}" id="ot64"/>
+                  </af:column>
+                  <af:column sortProperty="AwbId" filterable="true"
+                             sortable="true"
+                             headerText="AWB No."
+                             id="c69" align="center" width="200">
+                    <af:outputText value="#{row.AwbId}" id="ot68"
+                                   inlineStyle="font-weight:bold;"/>
+                  </af:column>
+                  <af:column sortProperty="CourierDate" filterable="true"
+                             sortable="true"
+                             headerText="AWB Date"
+                             id="c61" align="center">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.CourierDate}"
+                                    id="id12"/>
+                    </f:facet>
+                    <af:outputText value="#{row.CourierDate}" id="ot75">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationLine2ViewOnly1.hints.CourierDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="CourierName" filterable="true"
+                             sortable="true"
+                             headerText="Courier Name"
+                             id="c70" align="center" width="120">
+                    <af:outputText value="#{row.CourierName}" id="ot74"/>
+                  </af:column>
+                  <af:column sortProperty="ItemCode" filterable="true"
+                             sortable="true"
+                             headerText="Item Category"
+                             id="c60" align="center">
+                    <af:outputText value="#{row.ItemCode}" id="ot73"/>
+                  </af:column>
+                  <af:column sortProperty="Buyer" filterable="true"
+                             sortable="true"
+                             headerText="Buyer"
+                             id="c73" align="center" width="150">
+                    <af:outputText value="#{row.Buyer}" id="ot71"
+                                   inlineStyle="font-weight:bold;"/>
+                  </af:column>
+                  <af:column sortProperty="SenderUnit" filterable="true"
+                             sortable="true"
+                             headerText="Sending Unit"
+                             id="c65" align="center" width="100">
+                    <af:outputText value="#{row.SenderUnit}" id="ot76"/>
+                  </af:column>
+                  <af:column sortProperty="DeliveryLocation" filterable="true"
+                             sortable="true"
+                             headerText="Receiver"
+                             id="c63" align="center" width="150">
+                    <af:outputText value="#{row.DeliveryLocation}" id="ot67"/>
+                  </af:column>
+                  <af:column sortProperty="DestinationCountry" filterable="true"
+                             sortable="true"
+                             headerText="Receiver Country"
+                             id="c66" align="center" width="75">
+                    <af:outputText value="#{row.DestinationCountry}" id="ot78"/>
+                  </af:column>
+                  <af:column sortProperty="Remarks" filterable="true"
+                             sortable="true"
+                             headerText="Remarks"
+                             id="c67" align="center" width="200">
+                    <af:outputText value="#{row.Remarks}" id="ot69"/>
+                  </af:column>
+                  <af:column sortProperty="CreationDate" filterable="true"
+                             sortable="true"
+                             headerText="Creation Date"
+                             id="c64" align="center">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.CreationDate}"
+                                    id="id14"/>
+                    </f:facet>
+                    <af:outputText value="#{row.CreationDate}" id="ot66">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationLine2ViewOnly1.hints.CreationDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="CreatorName" filterable="true"
+                             sortable="true"
+                             headerText="Creator Name"
+                             id="c72" align="center">
+                    <af:outputText value="#{row.CreatorName}" id="ot70"/>
+                  </af:column>
+                  <af:column sortProperty="LastUpdateDate" filterable="true"
+                             sortable="true"
+                             headerText="Last Update Date"
+                             id="c62" align="center">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.LastUpdateDate}"
+                                    id="id13"/>
+                    </f:facet>
+                    <af:outputText value="#{row.LastUpdateDate}" id="ot65">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationLine2ViewOnly1.hints.LastUpdateDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="UpdaterName" filterable="true"
+                             sortable="true"
+                             headerText="Updater Name"
+                             id="c74" align="center">
+                    <af:outputText value="#{row.UpdaterName}" id="ot77"/>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </af:panelHeader>
+            <af:panelHeader text="Export Details Panel" id="ph5">
+              <f:facet name="context"/>
+              <f:facet name="menuBar"/>
+              <f:facet name="toolbar"/>
+              <f:facet name="legend"/>
+              <f:facet name="info"/>
+              <af:panelCollection id="pc4" styleClass="AFStretchWidth">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="statusbar"/>
+                <af:table value="#{bindings.MnjCourierInformationDetailViewOnly1.collectionModel}"
+                          var="row"
+                          rows="#{bindings.MnjCourierInformationDetailViewOnly1.rangeSize}"
+                          emptyText="#{bindings.MnjCourierInformationDetailViewOnly1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.MnjCourierInformationDetailViewOnly1.rangeSize}"
+                          rowBandingInterval="0"
+                          filterModel="#{bindings.MnjCourierInformationDetailViewOnly1Query.queryDescriptor}"
+                          queryListener="#{bindings.MnjCourierInformationDetailViewOnly1Query.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.MnjCourierInformationDetailViewOnly1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.MnjCourierInformationDetailViewOnly1.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t4"
+                          partialTriggers=":::pc3:t3 :::pc3 :::ph4"
+                          autoHeightRows="10">
+                  <af:column sortProperty="Serial" filterable="true"
+                             sortable="true"
+                             headerText="Sl."
+                             id="c76" align="center" width="35">
+                    <af:outputText value="#{vs.index+1}" id="ot87"/>
+                  </af:column>
+                  <af:column sortProperty="Season" filterable="true"
+                             sortable="true"
+                             headerText="Season"
+                             id="c82" align="center" width="130">
+                    <af:outputText value="#{row.Season}" id="ot79"
+                                   inlineStyle="font-weight:bold;"/>
+                  </af:column>
+                  <af:column sortProperty="StyleNumber" filterable="true"
+                             sortable="true"
+                             headerText="Style"
+                             id="c87" align="center" width="150">
+                    <af:outputText value="#{row.StyleNumber}" id="ot88"
+                                   inlineStyle="font-weight:bold;"/>
+                  </af:column>
+                  <af:column sortProperty="Qty" filterable="true"
+                             sortable="true"
+                             headerText="Qty"
+                             id="c81" align="center" width="60">
+                    <af:outputText value="#{row.Qty}" id="ot85">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.MnjCourierInformationDetailViewOnly1.hints.Qty.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="Uom" filterable="true"
+                             sortable="true"
+                             headerText="UOM"
+                             id="c85" align="center" width="80">
+                    <af:outputText value="#{row.Uom}" id="ot81"/>
+                  </af:column>
+                  <af:column sortProperty="ValuePrice" filterable="true"
+                             sortable="true"
+                             headerText="Value/ Price"
+                             id="c80" align="center" width="75">
+                    <af:outputText value="#{row.ValuePrice}" id="ot82">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.MnjCourierInformationDetailViewOnly1.hints.ValuePrice.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="Weight" filterable="true"
+                             sortable="true"
+                             headerText="Weight in KGS"
+                             id="c83" align="center">
+                    <af:outputText value="#{row.Weight}" id="ot90">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.MnjCourierInformationDetailViewOnly1.hints.Weight.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="Wash" filterable="true"
+                             sortable="true"
+                             headerText="Wash"
+                             id="c84" align="center" width="150">
+                    <af:outputText value="#{row.Wash}" id="ot91"/>
+                  </af:column>
+                  <af:column sortProperty="Remarks" filterable="true"
+                             sortable="true"
+                             headerText="Remarks"
+                             id="c79" align="center" width="200">
+                    <af:outputText value="#{row.Remarks}" id="ot84"/>
+                  </af:column>
+                  <af:column sortProperty="CreationDate" filterable="true"
+                             sortable="true"
+                             headerText="Creation Date"
+                             id="c77" align="center">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.CreationDate}"
+                                    id="id15"/>
+                    </f:facet>
+                    <af:outputText value="#{row.CreationDate}" id="ot83">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationDetailViewOnly1.hints.CreationDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="CreatorName" filterable="true"
+                             sortable="true"
+                             headerText="Creator Name"
+                             id="c86" align="center">
+                    <af:outputText value="#{row.CreatorName}" id="ot86"/>
+                  </af:column>
+                  <af:column sortProperty="LastUpdateDate" filterable="true"
+                             sortable="true"
+                             headerText="Last Update Date"
+                             id="c75" align="center">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.LastUpdateDate}"
+                                    id="id16"/>
+                    </f:facet>
+                    <af:outputText value="#{row.LastUpdateDate}" id="ot89">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationDetailViewOnly1.hints.LastUpdateDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="UpdaterName" filterable="true"
+                             sortable="true"
+                             headerText="Updater Name"
+                             id="c78" align="center">
+                    <af:outputText value="#{row.UpdaterName}" id="ot80"/>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </af:panelHeader>
+          </af:showDetailItem>
+        </af:panelTabbed>
+      </af:form>
+      <af:form id="f1">
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

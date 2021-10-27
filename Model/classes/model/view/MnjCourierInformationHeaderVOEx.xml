@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MnjCourierInformationHeaderVOEx"
+  Version="11.1.1.62.29"
+  Extends="model.view.MnjCourierInformationHeaderVO"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="model.view.MnjCourierInformationHeaderVOEx_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="RESP_ID"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression><![CDATA[51159//adf.context.sessionScope.respId]]></TransientExpression>
+  </Variable>
+  <SQLQuery>
+    <![CDATA[/* Formatted on 8/6/2019 9:57:01 AM (QP5 v5.256.13226.35510) */
+  SELECT MNJCOURIERINFORMATIONHEADERE1.HEADER_ID,
+         MNJCOURIERINFORMATIONHEADERE1.DOC_NO,
+         MNJCOURIERINFORMATIONHEADERE1.AWB_ID,
+         MNJCOURIERINFORMATIONHEADERE1.COURIER_NAME,
+         MNJCOURIERINFORMATIONHEADERE1.IMPORT_EXPORT,
+         MNJCOURIERINFORMATIONHEADERE1.COURIER_DATE,
+         (SELECT LISTAGG (AWB_ID, ',') WITHIN GROUP (ORDER BY AWB_ID)
+            FROM (SELECT DISTINCT L.AWB_ID
+                    FROM MNJ_COURIER_INFORMATION_LINE L
+                   WHERE MNJCOURIERINFORMATIONHEADERE1.HEADER_ID = L.HEADER_ID))
+            IMPORT_AWB_NO,
+         (SELECT LISTAGG (AWB_ID, ',') WITHIN GROUP (ORDER BY AWB_ID)
+            FROM (SELECT DISTINCT L.AWB_ID
+                    FROM MNJ_COURIER_INFORMATION_LINE_2 L
+                   WHERE MNJCOURIERINFORMATIONHEADERE1.HEADER_ID = L.HEADER_ID))
+            EXPORT_AWB_NO,
+         MNJCOURIERINFORMATIONHEADERE1.BUYER,
+         MNJCOURIERINFORMATIONHEADERE1.BUYER_ID,
+         MNJCOURIERINFORMATIONHEADERE1.DEV_SAMPLE_BULK,
+         MNJCOURIERINFORMATIONHEADERE1.UNIT,
+         MNJCOURIERINFORMATIONHEADERE1.SENDER_UNIT,
+         MNJCOURIERINFORMATIONHEADERE1.DELIVERY_LOCATION,
+         MNJCOURIERINFORMATIONHEADERE1.USER_NAME,
+         MNJCOURIERINFORMATIONHEADERE1.SEASON,
+         MNJCOURIERINFORMATIONHEADERE1.STYLE_NUMBER,
+         MNJCOURIERINFORMATIONHEADERE1.BPO_NUMBER,
+         MNJCOURIERINFORMATIONHEADERE1.ITEM_CODE,
+         MNJCOURIERINFORMATIONHEADERE1.QTY,
+         MNJCOURIERINFORMATIONHEADERE1.DOC_RCVD_DATE,
+         MNJCOURIERINFORMATIONHEADERE1.EXPECTED_DELIVERY_DATE,
+         MNJCOURIERINFORMATIONHEADERE1.ACTUAL_DELIVERY_DATE,
+         MNJCOURIERINFORMATIONHEADERE1.ORG_ID,
+         MNJCOURIERINFORMATIONHEADERE1.SAMPLE_DOC_NO,
+         MNJCOURIERINFORMATIONHEADERE1.VERSION_NO,
+         MNJCOURIERINFORMATIONHEADERE1.VERSION_DATE,
+         MNJCOURIERINFORMATIONHEADERE1.RESP_ID,
+         MNJCOURIERINFORMATIONHEADERE1.USER_ID,
+         MNJCOURIERINFORMATIONHEADERE1.CREATION_DATE,
+         MNJCOURIERINFORMATIONHEADERE1.CREATED_BY,
+         (SELECT USER_NAME
+            FROM FND_USER
+           WHERE USER_ID = MNJCOURIERINFORMATIONHEADERE1.CREATED_BY)
+            CREATOR_NAME,
+         MNJCOURIERINFORMATIONHEADERE1.LAST_UPDATE_DATE,
+         MNJCOURIERINFORMATIONHEADERE1.LAST_UPDATED_BY,
+         (SELECT USER_NAME
+            FROM FND_USER
+           WHERE USER_ID = MNJCOURIERINFORMATIONHEADERE1.LAST_UPDATED_BY)
+            UPDATER_NAME,
+         MNJCOURIERINFORMATIONHEADERE1.UOM,
+         MNJCOURIERINFORMATIONHEADERE1.KNOW_STYLE,
+         MNJCOURIERINFORMATIONHEADERE1.CONCIGNEE_UNIT,
+         MNJCOURIERINFORMATIONHEADERE1.PAYEE_UNIT,
+         MNJCOURIERINFORMATIONHEADERE1.SUPPLIER_COUNTRY,
+         MNJCOURIERINFORMATIONHEADERE1.VALUE_PRICE,
+         MNJCOURIERINFORMATIONHEADERE1.INVOICE_NO,
+         MNJCOURIERINFORMATIONHEADERE1.INVOICE_DATE,
+         MNJCOURIERINFORMATIONHEADERE1.CURRENCY,
+         MNJCOURIERINFORMATIONHEADERE1.WEIGHT,
+         MNJCOURIERINFORMATIONHEADERE1.WEIGHT_TYPE,
+         MNJCOURIERINFORMATIONHEADERE1.PACKAGE_QTY,
+         MNJCOURIERINFORMATIONHEADERE1.ITEM,
+         MNJCOURIERINFORMATIONHEADERE1.UD_NO,
+         MNJCOURIERINFORMATIONHEADERE1.EXPORT_LC_NO,
+         MNJCOURIERINFORMATIONHEADERE1.CNF_AGENT_NAME,
+         MNJCOURIERINFORMATIONHEADERE1.DOC_HANDOVER_DATE,
+         MNJCOURIERINFORMATIONHEADERE1.DELIVERY_DATE,
+         MNJCOURIERINFORMATIONHEADERE1.COMPLETION_STATUS_COMMERCIAL,
+         MNJCOURIERINFORMATIONHEADERE1.COMPLETION_STATUS_MERCHANT
+    FROM MNJ_COURIER_INFORMATION_HEADER MNJCOURIERINFORMATIONHEADERE1
+    WHERE 1=1
+   
+
+    AND ((:RESP_ID = 51318 AND MNJCOURIERINFORMATIONHEADERE1.COMPLETION_STATUS_COMMERCIAL = 'No')
+        OR  
+     ((:RESP_ID = 51159 OR :RESP_ID = 52666)   
+     AND MNJCOURIERINFORMATIONHEADERE1.COMPLETION_STATUS_MERCHANT = 'No'))
+    
+ORDER BY       MNJCOURIERINFORMATIONHEADERE1.DOC_NO DESC]]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="ImportAwbNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="IMPORT_AWB_NO"
+    Expression="IMPORT_AWB_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+      <Attr Name="_OverrideAttr" Value="true"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ExportAwbNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EXPORT_AWB_NO"
+    Expression="EXPORT_AWB_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+      <Attr Name="_OverrideAttr" Value="true"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatorName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CREATOR_NAME"
+    Expression="CREATOR_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+      <Attr Name="_OverrideAttr" Value="true"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="UpdaterName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UPDATER_NAME"
+    Expression="UPDATER_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+      <Attr Name="_OverrideAttr" Value="true"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Serial"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_OverrideAttr" Value="true"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CourierTypeImport"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_OverrideAttr" Value="true"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CourierTypeExport"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_OverrideAttr" Value="true"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

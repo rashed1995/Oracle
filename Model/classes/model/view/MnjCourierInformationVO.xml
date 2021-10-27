@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MnjCourierInformationVO"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchMode="FETCH_AS_NEEDED"
+  RangeSize="25">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="BuyerLOV1"
+    ViewObjectName="model.lov.BuyerLOV"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="BuyerLOVCriteria"
+      FullName="model.lov.BuyerLOV.BuyerLOVCriteria"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="SeasonLOV1"
+    ViewObjectName="model.lov.SeasonLOV">
+    <ParameterMap>
+      <PIMap Variable="P_BUYER">
+        <TransientExpression><![CDATA[Buyer]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ImportExportLOV1"
+    ViewObjectName="model.lov.ImportExportLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="StyleLOV1"
+    ViewObjectName="model.lov.StyleLOV">
+    <ParameterMap>
+      <PIMap Variable="P_SEASON">
+        <TransientExpression><![CDATA[Season]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="P_BUYER_ID">
+        <TransientExpression><![CDATA[BuyerId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="PurposeLOV1"
+    ViewObjectName="model.lov.PurposeLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="BuyerWiseUnitLOV1"
+    ViewObjectName="model.lov.BuyerWiseUnitLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CourierNameLOV1"
+    ViewObjectName="model.lov.CourierNameLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="UnitOfMeasureLOV1"
+    ViewObjectName="model.lov.UnitOfMeasureLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ItemCategoryLOV1"
+    ViewObjectName="model.lov.ItemCategoryLOV"
+    RowLevelBinds="true"/>
+ 
+  <ViewAccessor
+    Name="CourierEntryTypeStaticLOV1"
+    ViewObjectName="model.lov.CourierEntryTypeStaticLOV"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_Buyer"
+    ListVOName="BuyerLOV1"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_Buyer_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Buyer"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="BuyerId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CustomerName"/>
+      <Item Value="CustomerId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CustomerName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Season"
+    ListVOName="SeasonLOV1"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_Season_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Season"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Season"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Season"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_StyleNumber"
+    ListVOName="StyleLOV1"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_StyleNumber_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="StyleNumber"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="StyleNumber"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="StyleNumber"/>
+      <Item Value="Season"/>
+      <Item Value="BuyerId"/>
+      <Item Value="Buyername"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_DevSampleBulk"
+    ListVOName="PurposeLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_DevSampleBulk_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DevSampleBulk"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Purpose"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Purpose"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Unit"
+    ListVOName="BuyerWiseUnitLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_Unit_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Unit"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="BuyerWiseUnit"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="BuyerWiseUnit"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_SenderUnit"
+    ListVOName="BuyerWiseUnitLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_SenderUnit_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="SenderUnit"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="BuyerWiseUnit"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="BuyerWiseUnit"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_DeliveryLocation"
+    ListVOName="BuyerWiseUnitLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_DeliveryLocation_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DeliveryLocation"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="BuyerWiseUnit"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="BuyerWiseUnit"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CourierName"
+    ListVOName="CourierNameLOV1"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_CourierName_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CourierName"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CourierName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CourierName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Uom"
+    ListVOName="UnitOfMeasureLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_Uom_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Uom"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="UnitOfMeasure"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="UnitOfMeasure"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ItemCode"
+    ListVOName="ItemCategoryLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ItemCode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ItemCategory"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ItemCategory"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery>
+    <![CDATA[SELECT MnjCourierInformationEO.AWB_ID, 
+       MnjCourierInformationEO.COURIER_ID, 
+       MnjCourierInformationEO.COURIER_NAME, 
+       MnjCourierInformationEO.IMPORT_EXPORT, 
+       MnjCourierInformationEO.COURIER_DATE, 
+       MnjCourierInformationEO.BUYER, 
+       MnjCourierInformationEO.BUYER_ID, 
+       MnjCourierInformationEO.DEV_SAMPLE_BULK, 
+       MnjCourierInformationEO.UNIT, 
+       MnjCourierInformationEO.SENDER_UNIT, 
+       MnjCourierInformationEO.DELIVERY_LOCATION, 
+       MnjCourierInformationEO.USER_NAME, 
+       MnjCourierInformationEO.SEASON, 
+       MnjCourierInformationEO.STYLE_NUMBER, 
+       MnjCourierInformationEO.BPO_NUMBER, 
+       MnjCourierInformationEO.ITEM_CODE, 
+       MnjCourierInformationEO.QTY, 
+       MnjCourierInformationEO.DOC_RCVD_DATE, 
+       MnjCourierInformationEO.EXPECTED_DELIVERY_DATE, 
+       MnjCourierInformationEO.ACTUAL_DELIVERY_DATE, 
+       MnjCourierInformationEO.ORG_ID, 
+       MnjCourierInformationEO.SAMPLE_DOC_NO, 
+       MnjCourierInformationEO.VERSION_NO, 
+       MnjCourierInformationEO.VERSION_DATE, 
+       MnjCourierInformationEO.RESP_ID, 
+       MnjCourierInformationEO.USER_ID, 
+       MnjCourierInformationEO.CREATION_DATE, 
+       MnjCourierInformationEO.CREATED_BY, 
+       MnjCourierInformationEO.LAST_UPDATE_DATE, 
+       MnjCourierInformationEO.LAST_UPDATED_BY,
+       MnjCourierInformationEO.UOM,
+       MnjCourierInformationEO.KNOW_STYLE
+       
+       
+FROM MNJ_COURIER_INFORMATION MnjCourierInformationEO
+WHERE MnjCourierInformationEO.IMPORT_EXPORT = 'Import'
+and   MnjCourierInformationEO.KNOW_STYLE = 'Y'
+ORDER BY MnjCourierInformationEO.COURIER_ID DESC]]>
+  </SQLQuery>
+  <EntityUsage
+    Name="MnjCourierInformationEO"
+    Entity="model.entity.MnjCourierInformationEO"/>
+  <ViewAttribute
+    Name="AwbId"
+    PrecisionRule="true"
+    EntityAttrName="AwbId"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="AWB_ID"/>
+  <ViewAttribute
+    Name="CourierId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CourierId"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="COURIER_ID"/>
+  <ViewAttribute
+    Name="CourierName"
+    PrecisionRule="true"
+    EntityAttrName="CourierName"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="COURIER_NAME"
+    LOVName="LOV_CourierName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ImportExport"
+    PrecisionRule="true"
+    EntityAttrName="ImportExport"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="IMPORT_EXPORT"/>
+  <ViewAttribute
+    Name="CourierDate"
+    PrecisionRule="true"
+    EntityAttrName="CourierDate"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="COURIER_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="model.view.MnjCourierInformationVO.CourierDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="model.view.MnjCourierInformationVO.CourierDate_FMT_FORMAT"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Buyer"
+    PrecisionRule="true"
+    EntityAttrName="Buyer"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="BUYER"
+    LOVName="LOV_Buyer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BuyerId"
+    PrecisionRule="true"
+    EntityAttrName="BuyerId"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="BUYER_ID"/>
+  <ViewAttribute
+    Name="DevSampleBulk"
+    PrecisionRule="true"
+    EntityAttrName="DevSampleBulk"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="DEV_SAMPLE_BULK"
+    LOVName="LOV_DevSampleBulk">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Unit"
+    PrecisionRule="true"
+    EntityAttrName="Unit"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="UNIT"
+    LOVName="LOV_Unit">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SenderUnit"
+    PrecisionRule="true"
+    EntityAttrName="SenderUnit"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="SENDER_UNIT"
+    LOVName="LOV_SenderUnit">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DeliveryLocation"
+    PrecisionRule="true"
+    EntityAttrName="DeliveryLocation"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="DELIVERY_LOCATION"
+    LOVName="LOV_DeliveryLocation">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="UserName"
+    PrecisionRule="true"
+    EntityAttrName="UserName"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="USER_NAME"/>
+  <ViewAttribute
+    Name="Season"
+    PrecisionRule="true"
+    EntityAttrName="Season"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="SEASON"
+    LOVName="LOV_Season">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="StyleNumber"
+    PrecisionRule="true"
+    EntityAttrName="StyleNumber"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="STYLE_NUMBER"
+    LOVName="LOV_StyleNumber">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BpoNumber"
+    PrecisionRule="true"
+    EntityAttrName="BpoNumber"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="BPO_NUMBER"/>
+  <ViewAttribute
+    Name="ItemCode"
+    PrecisionRule="true"
+    EntityAttrName="ItemCode"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="ITEM_CODE"
+    LOVName="LOV_ItemCode">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Qty"
+    PrecisionRule="true"
+    EntityAttrName="Qty"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="QTY"/>
+  <ViewAttribute
+    Name="DocRcvdDate"
+    PrecisionRule="true"
+    EntityAttrName="DocRcvdDate"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="DOC_RCVD_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="model.view.MnjCourierInformationVO.DocRcvdDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="model.view.MnjCourierInformationVO.DocRcvdDate_FMT_FORMAT"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ExpectedDeliveryDate"
+    PrecisionRule="true"
+    EntityAttrName="ExpectedDeliveryDate"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="EXPECTED_DELIVERY_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="model.view.MnjCourierInformationVO.ExpectedDeliveryDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="model.view.MnjCourierInformationVO.ExpectedDeliveryDate_FMT_FORMAT"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ActualDeliveryDate"
+    PrecisionRule="true"
+    EntityAttrName="ActualDeliveryDate"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="ACTUAL_DELIVERY_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="model.view.MnjCourierInformationVO.ActualDeliveryDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="model.view.MnjCourierInformationVO.ActualDeliveryDate_FMT_FORMAT"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrgId"
+    PrecisionRule="true"
+    EntityAttrName="OrgId"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="ORG_ID"/>
+  <ViewAttribute
+    Name="SampleDocNo"
+    PrecisionRule="true"
+    EntityAttrName="SampleDocNo"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="SAMPLE_DOC_NO"/>
+  <ViewAttribute
+    Name="VersionNo"
+    PrecisionRule="true"
+    EntityAttrName="VersionNo"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="VERSION_NO"/>
+  <ViewAttribute
+    Name="VersionDate"
+    PrecisionRule="true"
+    EntityAttrName="VersionDate"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="VERSION_DATE"/>
+  <ViewAttribute
+    Name="RespId"
+    PrecisionRule="true"
+    EntityAttrName="RespId"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="RESP_ID"/>
+  <ViewAttribute
+    Name="UserId"
+    PrecisionRule="true"
+    EntityAttrName="UserId"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="USER_ID"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="CREATION_DATE"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="LAST_UPDATE_DATE"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="Uom"
+    PrecisionRule="true"
+    AliasName="UOM"
+    EntityAttrName="Uom"
+    EntityUsage="MnjCourierInformationEO"
+    LOVName="LOV_Uom">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Serial"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="KnowStyle"
+    PrecisionRule="true"
+    EntityAttrName="KnowStyle"
+    EntityUsage="MnjCourierInformationEO"
+    AliasName="KNOW_STYLE"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.62.29" id="ExportPGPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="MnjCourierInformationHeaderVO1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjCourierInformationHeaderVO1Iterator"/>
+    <iterator Binds="MnjCourierInformationLineVO1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjCourierInformationLineVO1Iterator"/>
+    <searchRegion Binds="MnjCourierInformationLineVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjCourierInformationLineVO1Query"/>
+    <iterator Binds="MnjCourierInformationLine2VO1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjCourierInformationLine2VO1Iterator"/>
+    <searchRegion Binds="MnjCourierInformationLine2VO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjCourierInformationLine2VO1Query"/>
+    <iterator Binds="MnjCourierInformationDetailVO1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjCourierInformationDetailVO1Iterator"/>
+    <searchRegion Binds="MnjCourierInformationDetailVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjCourierInformationDetailVO1Query"/>
+    <iterator Binds="MnjCourierInformationLineVOEx1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjCourierInformationLineVOEx1Iterator"/>
+    <searchRegion Binds="MnjCourierInformationLineVOEx1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjCourierInformationLineVOEx1Query"/>
+    <iterator Binds="popUp1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="popUp1Iterator"/>
+    <searchRegion Binds="popUp1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="popUp1Query"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="MnjCourierInformationHeaderVO1Iterator"
+                     id="DocNo">
+      <AttrNames>
+        <Item Value="DocNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjCourierInformationHeaderVO1Iterator"
+                     id="CreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="MnjCourierInformationLineVO1Iterator"
+          id="MnjCourierInformationLineVO1">
+      <nodeDefinition DefName="model.view.MnjCourierInformationLineVO"
+                      Name="MnjCourierInformationLineVO10">
+        <AttrNames>
+          <Item Value="ImportExport"/>
+          <Item Value="CourierName"/>
+          <Item Value="AwbId"/>
+          <Item Value="ConcigneeUnit"/>
+          <Item Value="PayeeUnit"/>
+          <Item Value="DeliveryLocation"/>
+          <Item Value="SenderUnit"/>
+          <Item Value="SupplierCountry"/>
+          <Item Value="ItemCode"/>
+          <Item Value="Item"/>
+          <Item Value="Qty"/>
+          <Item Value="ValuePrice"/>
+          <Item Value="Uom"/>
+          <Item Value="DevSampleBulk"/>
+          <Item Value="Buyer"/>
+          <Item Value="Season"/>
+          <Item Value="Serial"/>
+          <Item Value="CourierDate"/>
+          <Item Value="Remarks"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatorName"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="UpdaterName"/>
+          <Item Value="NeedDetails"/>
+          <Item Value="ProcessIndicatorFlag"/>
+          <Item Value="CompletionFlag"/>
+          <Item Value="ProcessIndicatorCommerFlag"/>
+          <Item Value="MerchantReceivedBy"/>
+          <Item Value="DocRcvdDate"/>
+          <Item Value="DocHandoverDate"/>
+          <Item Value="ExpectedDeliveryDate"/>
+          <Item Value="ActualDeliveryDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="MnjCourierInformationLineVO1Iterator"
+          id="MnjCourierInformationLineVO11">
+      <nodeDefinition DefName="model.view.MnjCourierInformationLineVO"
+                      Name="MnjCourierInformationLineVO110">
+        <AttrNames>
+          <Item Value="Serial"/>
+          <Item Value="ImportExport"/>
+          <Item Value="AwbId"/>
+          <Item Value="DocRcvdDate"/>
+          <Item Value="InvoiceNo"/>
+          <Item Value="InvoiceDate"/>
+          <Item Value="ExpectedDeliveryDate"/>
+          <Item Value="Qty"/>
+          <Item Value="ValuePrice"/>
+          <Item Value="Uom"/>
+          <Item Value="Currency"/>
+          <Item Value="Weight"/>
+          <Item Value="PackageQty"/>
+          <Item Value="Item"/>
+          <Item Value="UdNo"/>
+          <Item Value="ExportLcNo"/>
+          <Item Value="CnfAgentName"/>
+          <Item Value="DocHandoverDate"/>
+          <Item Value="ActualDeliveryDate"/>
+          <Item Value="Remarks"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatorName"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="UpdaterName"/>
+          <Item Value="RemarksCommercial"/>
+          <Item Value="NeedDetailsCommercial"/>
+          <Item Value="ProcessIndicatorFlag"/>
+          <Item Value="CompletionFlagCommercial"/>
+          <Item Value="ProcessIndicatorCommerFlag"/>
+          <Item Value="ConcigneeUnit"/>
+          <Item Value="PayeeUnit"/>
+          <Item Value="CourierDate"/>
+          <Item Value="SenderUnit"/>
+          <Item Value="SupplierCountry"/>
+          <Item Value="DeliveryLocation"/>
+          <Item Value="ItemCode"/>
+          <Item Value="CourierName"/>
+          <Item Value="DevSampleBulk"/>
+          <Item Value="MerchantReceivedBy"/>
+          <Item Value="QtyYard"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MnjCourierInformationLineVO1Iterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="MnjCourierInformationLine2VO1Iterator"
+          id="MnjCourierInformationLine2VO1">
+      <nodeDefinition DefName="model.view.MnjCourierInformationLine2VO"
+                      Name="MnjCourierInformationLine2VO10">
+        <AttrNames>
+          <Item Value="ImportExport"/>
+          <Item Value="AwbId"/>
+          <Item Value="CourierDate"/>
+          <Item Value="CourierName"/>
+          <Item Value="ItemCode"/>
+          <Item Value="SenderUnit"/>
+          <Item Value="DeliveryLocation"/>
+          <Item Value="Remarks"/>
+          <Item Value="Serial"/>
+          <Item Value="Buyer"/>
+          <Item Value="Season"/>
+          <Item Value="DestinationCountry"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatorName"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="UpdaterName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="MnjCourierInformationDetailVO1Iterator"
+          id="MnjCourierInformationDetailVO1">
+      <nodeDefinition DefName="model.view.MnjCourierInformationDetailVO"
+                      Name="MnjCourierInformationDetailVO10">
+        <AttrNames>
+          <Item Value="Buyer"/>
+          <Item Value="Season"/>
+          <Item Value="StyleNumber"/>
+          <Item Value="Serial"/>
+          <Item Value="DestinationCountry"/>
+          <Item Value="Qty"/>
+          <Item Value="Uom"/>
+          <Item Value="ValuePrice"/>
+          <Item Value="Weight"/>
+          <Item Value="Wash"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatorName"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="UpdaterName"/>
+          <Item Value="Remarks"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MnjCourierInformationDetailVO1Iterator" id="Delete2"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="MnjCourierInformationLine2VO1Iterator" id="Delete3"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="MnjCourierInformationHeaderVO1Iterator"
+                     id="CreatorName">
+      <AttrNames>
+        <Item Value="CreatorName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjCourierInformationHeaderVO1Iterator"
+                     id="KnowStyle">
+      <AttrNames>
+        <Item Value="KnowStyle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjCourierInformationLine2VO1Iterator"
+                     id="ImportExport">
+      <AttrNames>
+        <Item Value="ImportExport"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjCourierInformationHeaderVO1Iterator"
+                     id="CompletionStatusMerchant">
+      <AttrNames>
+        <Item Value="CompletionStatusMerchant"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjCourierInformationHeaderVO1Iterator"
+                     id="CompletionStatusCommercial">
+      <AttrNames>
+        <Item Value="CompletionStatusCommercial"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjCourierInformationLine2VO1Iterator"
+                     id="Buyer">
+      <AttrNames>
+        <Item Value="Buyer"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="MnjCourierInformationHeaderVO1Iterator"
+          StaticList="false" Uses="LOV_ImportExport" id="ImportExport1"
+          DTSupportsMRU="false"/>
+    <tree IterBinding="MnjCourierInformationLineVOEx1Iterator"
+          id="MnjCourierInformationLineVOEx1">
+      <nodeDefinition DefName="model.view.MnjCourierInformationLineVOEx"
+                      Name="MnjCourierInformationLineVOEx10">
+        <AttrNames>
+          <Item Value="Serial"/>
+          <Item Value="ImportExport"/>
+          <Item Value="ConcigneeUnit"/>
+          <Item Value="PayeeUnit"/>
+          <Item Value="SenderUnit"/>
+          <Item Value="SupplierCountry"/>
+          <Item Value="CourierName"/>
+          <Item Value="AwbId"/>
+          <Item Value="CourierDate"/>
+          <Item Value="ItemCode"/>
+          <Item Value="Item"/>
+          <Item Value="InvoiceNo"/>
+          <Item Value="InvoiceDate"/>
+          <Item Value="Currency"/>
+          <Item Value="ValuePrice"/>
+          <Item Value="PackageQty"/>
+          <Item Value="Weight"/>
+          <Item Value="Qty"/>
+          <Item Value="Uom"/>
+          <Item Value="QtyYard"/>
+          <Item Value="DocRcvdDate"/>
+          <Item Value="DocHandoverDate"/>
+          <Item Value="ExpectedDeliveryDate"/>
+          <Item Value="ActualDeliveryDate"/>
+          <Item Value="UdNo"/>
+          <Item Value="ExportLcNo"/>
+          <Item Value="CnfAgentName"/>
+          <Item Value="MerchantReceivedBy"/>
+          <Item Value="DeliveryLocation"/>
+          <Item Value="DevSampleBulk"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatorName"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="UpdaterName"/>
+          <Item Value="RemarksCommercial"/>
+          <Item Value="CompletionFlagCommercial"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="MnjCourierInformationLineVOEx1Iterator"
+          id="MnjCourierInformationLineVOEx11">
+      <nodeDefinition DefName="model.view.MnjCourierInformationLineVOEx"
+                      Name="MnjCourierInformationLineVOEx110">
+        <AttrNames>
+          <Item Value="Serial"/>
+          <Item Value="ImportExport"/>
+          <Item Value="CourierName"/>
+          <Item Value="AwbId"/>
+          <Item Value="CourierDate"/>
+          <Item Value="ConcigneeUnit"/>
+          <Item Value="PayeeUnit"/>
+          <Item Value="SenderUnit"/>
+          <Item Value="SupplierCountry"/>
+          <Item Value="DeliveryLocation"/>
+          <Item Value="ItemCode"/>
+          <Item Value="Item"/>
+          <Item Value="DevSampleBulk"/>
+          <Item Value="Buyer"/>
+          <Item Value="Season"/>
+          <Item Value="MerchantReceivedBy"/>
+          <Item Value="Qty"/>
+          <Item Value="Uom"/>
+          <Item Value="ValuePrice"/>
+          <Item Value="Remarks"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatorName"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="UpdaterName"/>
+          <Item Value="CompletionFlag"/>
+          <Item Value="DocRcvdDate"/>
+          <Item Value="DocHandoverDate"/>
+          <Item Value="ExpectedDeliveryDate"/>
+          <Item Value="ActualDeliveryDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="MnjCourierInformationHeaderVO1Iterator"
+                     id="ActualCreatorName">
+      <AttrNames>
+        <Item Value="ActualCreatorName"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="AppModuleDataControl"/>
+    <listOfValues StaticList="false"
+                  IterBinding="MnjCourierInformationLineVO1Iterator"
+                  Uses="LOV_SupplierNameLOV" id="SupplierNameLOV"/>
+    <tree IterBinding="popUp1Iterator" id="popUp11">
+      <nodeDefinition DefName="model.view.popUp" Name="popUp110">
+        <AttrNames>
+          <Item Value="ItemCode"/>
+          <Item Value="ItemCodeCombination"/>
+          <Item Value="TotalBudgetQty"/>
+          <Item Value="TotBudgetAmt"/>
+          <Item Value="Consumption"/>
+          <Item Value="Amount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

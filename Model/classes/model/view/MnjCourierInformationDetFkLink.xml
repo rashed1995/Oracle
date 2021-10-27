@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MnjCourierInformationDetFkLink"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  EntityAssociation="model.entity.MnjCourierInformationDetFkAssoc">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewLinkDefEnd
+    Name="MnjCourierInformationLine2VO"
+    Cardinality="1"
+    Owner="model.view.MnjCourierInformationLine2VO"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_finderName" Value="MnjCourierInformationLine2VO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="model.view.MnjCourierInformationLine2VO.CourierIdExport"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="MnjCourierInformationDetailVO"
+    Cardinality="-1"
+    Owner="model.view.MnjCourierInformationDetailVO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="MnjCourierInformationDetailVO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="model.view.MnjCourierInformationDetailVO.CourierIdExport"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

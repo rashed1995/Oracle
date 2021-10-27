@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.62.29" id="HomePGPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="MnjCourierInformationHeaderVO1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjCourierInformationHeaderVO1Iterator"/>
+    <searchRegion Binds="MnjCourierInformationHeaderVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjCourierInformationHeaderVO1Query"/>
+    <invokeAction Binds="setSessionValues" id="setSessionValue"
+                  Refresh="always"/>
+    <iterator Binds="MnjCourierInformationHeaderViewOnly1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjCourierInformationHeaderViewOnly1Iterator"/>
+    <searchRegion Binds="MnjCourierInformationHeaderViewOnly1Iterator"
+                  Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjCourierInformationHeaderViewOnly1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="MnjCourierInformationHeaderVO1Iterator"
+          id="MnjCourierInformationHeaderVO1">
+      <nodeDefinition DefName="model.view.MnjCourierInformationHeaderVO"
+                      Name="MnjCourierInformationHeaderVO10">
+        <AttrNames>
+          <Item Value="HeaderId"/>
+          <Item Value="DocNo"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="Serial"/>
+          <Item Value="CreatorName"/>
+          <Item Value="UpdaterName"/>
+          <Item Value="CompletionStatusMerchant"/>
+          <Item Value="CompletionStatusCommercial"/>
+          <Item Value="ImportAwbNo"/>
+          <Item Value="ExportAwbNo"/>
+          <Item Value="ImportExport"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MnjCourierInformationHeaderVO1Iterator"
+            id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="MnjCourierInformationHeaderVO1Iterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="AppModuleDataControl"/>
+    <methodAction id="setSessionValues"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setSessionValues"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.setSessionValues_AppModuleDataControl_dataProvider_setSessionValues_result">
+      <NamedData NDName="orgId" NDValue="#{viewScope.OrgId}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="userId" NDValue="#{viewScope.UserId}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="respId" NDValue="#{viewScope.RespId}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="respAppl" NDValue="#{viewScope.RespAppId}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="MnjCourierInformationHeaderViewOnly1Iterator"
+          id="MnjCourierInformationHeaderViewOnly1">
+      <nodeDefinition DefName="model.view.MnjCourierInformationHeaderViewOnly"
+                      Name="MnjCourierInformationHeaderViewOnly10">
+        <AttrNames>
+          <Item Value="DocNo"/>
+          <Item Value="ImportExport"/>
+          <Item Value="ImportAwbNo"/>
+          <Item Value="ExportAwbNo"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatorName"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="UpdaterName"/>
+          <Item Value="CompletionStatusMerchant"/>
+          <Item Value="CompletionStatusCommercial"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

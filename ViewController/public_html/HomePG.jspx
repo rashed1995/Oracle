@@ -1,0 +1,379 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelHeader text="MJ-Courier Management Dashboard" id="ph1"
+                        icon="/icons/projection3.png"
+                        inlineStyle="height:550.0px;">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:panelGroupLayout id="pgl5" layout="horizontal" halign="center">
+            <af:commandButton actionListener="#{bindings.CreateInsert.execute}"
+                              text="Create"
+                              disabled="#{!bindings.CreateInsert.enabled}"
+                              id="cb2" action="*gotoExportPG"
+                              icon="/icons/Icon_6-512.png"
+                              partialSubmit="true"
+                              inlineStyle="height:30.0px;"/>
+            <af:spacer width="20" height="20" id="s1"/>
+            <af:commandButton actionListener="#{bindings.Commit.execute}"
+                              text="Save" id="cb4" inlineStyle="height:30px;"
+                              icon="/icons/save new.png" partialSubmit="true"/>
+          </af:panelGroupLayout>
+          <af:panelTabbed id="pt1" styleClass="AFStretchWidth"
+                          inlineStyle="height:500px;">
+            <af:showDetailItem text="Pending" id="sdi1">
+              <af:panelGroupLayout id="pgl6" layout="horizontal" halign="center"
+                                   inlineStyle="font-size:15px; color:Navy; font-weight:bold;"
+                                   partialTriggers="pc1:t1">
+                <af:outputText value="Total" id="ot21"
+                               inlineStyle="font-size:15px; color:Black; font-weight:bold;"/>
+                <af:spacer width="5" height="10" id="s2"/>
+                <af:outputText id="ot22"
+                               inlineStyle="font-size:24px; font-weight:bold; color:rgb(255,115,66);"
+                               value="#{bindings.MnjCourierInformationHeaderVO1Iterator.estimatedRowCount}"/>
+                <af:spacer width="5" height="10" id="spacer1"/>
+                <af:outputText value="Pending" id="ot23"
+                               inlineStyle="font-size:15px; color:Black; font-weight:bold;"/>
+              </af:panelGroupLayout>
+              <af:panelCollection id="pc1" styleClass="AFStretchWidth"
+                                  inlineStyle="height:405.0px;">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar">
+                  <af:toolbar id="t2"/>
+                </f:facet>
+                <f:facet name="statusbar"/>
+                <af:table value="#{bindings.MnjCourierInformationHeaderVO1.collectionModel}"
+                          var="row"
+                          rows="#{bindings.MnjCourierInformationHeaderVO1.rangeSize}"
+                          emptyText="#{bindings.MnjCourierInformationHeaderVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.MnjCourierInformationHeaderVO1.rangeSize}"
+                          rowBandingInterval="0"
+                          filterModel="#{bindings.MnjCourierInformationHeaderVO1Query.queryDescriptor}"
+                          queryListener="#{bindings.MnjCourierInformationHeaderVO1Query.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.MnjCourierInformationHeaderVO1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.MnjCourierInformationHeaderVO1.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t1"
+                          partialTriggers=":::cb2 cb3 cil1">
+                  <af:column sortProperty="DocNo" filterable="true"
+                             sortable="true" headerText="Courier Doc No."
+                             id="c1" align="center" width="50">
+                    <af:outputText value="#{row.DocNo}" id="ot4"
+                                   visible="false">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.MnjCourierInformationHeaderVO1.hints.DocNo.format}"/>
+                    </af:outputText>
+                    <af:commandLink text="#{row.DocNo}" id="cl1"
+                                    action="*gotoExportPG"
+                                    inlineStyle="font-weight:bold;"
+                                    shortDesc="Click to open"
+                                    partialSubmit="true"/>
+                  </af:column>
+                  <af:column headerText="Courier Type" id="c13" align="center"
+                             sortable="true" filterable="true"
+                             sortProperty="ImportExport" width="50"
+                             filterFeatures="caseInsensitive">
+                    <af:outputText value="#{row.ImportExport}" id="ot10"/>
+                  </af:column>
+                  <af:column id="c11" align="center" sortable="true"
+                             filterable="true" sortProperty="ImportAwbNo"
+                             headerText="Import AWB No." width="250">
+                    <af:outputText value="#{row.ImportAwbNo}" id="ot8"/>
+                  </af:column>
+                  <af:column headerText="Export AWB No." id="c12" align="center"
+                             sortable="true" filterable="true"
+                             sortProperty="ExportAwbNo" width="250"
+                             visible="#{sessionScope.respId=='51318'? 'false':'true'}">
+                    <af:outputText value="#{row.ExportAwbNo}" id="ot9"/>
+                  </af:column>
+                  <af:column sortProperty="CreationDate" filterable="true"
+                             sortable="true" headerText="Creation Date" id="c2"
+                             align="center">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.CreationDate}"
+                                    id="id2"/>
+                    </f:facet>
+                    <af:outputText value="#{row.CreationDate}" id="ot2">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationHeaderVO1.hints.CreationDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column headerText="Creator Name" id="c5" align="center"
+                             sortable="true" filterable="true"
+                             sortProperty="CreatorName"
+                             filterFeatures="caseInsensitive">
+                    <af:outputText value="#{row.CreatorName}" id="ot1"/>
+                  </af:column>
+                  <af:column sortProperty="LastUpdateDate" filterable="true"
+                             sortable="true" headerText="Last Update Date"
+                             id="c3" align="center">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.LastUpdateDate}"
+                                    id="id1"/>
+                    </f:facet>
+                    <af:outputText value="#{row.LastUpdateDate}" id="ot3">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationHeaderVO1.hints.LastUpdateDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column headerText="Updater Name" id="c6" align="center"
+                             sortable="true" filterable="true"
+                             sortProperty="UpdaterName"
+                             filterFeatures="caseInsensitive">
+                    <af:outputText value="#{row.UpdaterName}" id="ot5"/>
+                  </af:column>
+                  <af:column id="c8" headerText="Status" align="center"
+                             visible="#{sessionScope.respId=='51318'? 'false':'true'}">
+                    <af:panelGroupLayout id="pgl2" layout="horizontal"
+                                         visible="#{row.CompletionStatusMerchant=='No'?'true':'false'}">
+                      <af:icon name="warning" id="i2"/>
+                      <af:commandImageLink text="Pending" id="cil3"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl4" layout="horizontal"
+                                         visible="#{row.CompletionStatusMerchant=='Yes'?'true':'false'}">
+                      <af:image source="/icons/ok_new.png" id="i4"/>
+                      <af:commandImageLink text="Completed" id="cil5"/>
+                    </af:panelGroupLayout>
+                  </af:column>
+                  <af:column id="c7" headerText="Status" align="center"
+                             visible="#{sessionScope.respId=='51159' or sessionScope.respId=='52666' ? 'false':'true'}">
+                    <af:panelGroupLayout id="pgl1" layout="horizontal"
+                                         visible="#{row.CompletionStatusCommercial=='No'?'true':'false'}">
+                      <af:icon name="warning" id="i1"/>
+                      <af:commandImageLink text="Pending" id="cil2"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl3" layout="horizontal"
+                                         visible="#{row.CompletionStatusCommercial=='Yes'?'true':'false'}">
+                      <af:image source="/icons/ok_new.png" id="i3"/>
+                      <af:commandImageLink text="Completed" id="cil4"/>
+                    </af:panelGroupLayout>
+                  </af:column>
+                  <af:column headerText="Completion Status" id="c9"
+                             align="center" visible="false">
+                    <af:outputText value="#{row.CompletionStatusMerchant}"
+                                   id="ot6" visible="false"/>
+                    <af:panelGroupLayout id="panelGroupLayout4"
+                                         layout="horizontal"
+                                         visible="#{row.CompletionStatusMerchant=='Yes'?'true':'false'}">
+                      <af:activeImage source="/icons/ok-2.png"
+                                      id="activeImage2"/>
+                      <af:outputText value="Yes" id="outputText8"
+                                     inlineStyle="font-weight:bold;"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="panelGroupLayout3"
+                                         layout="horizontal"
+                                         visible="#{row.CompletionStatusMerchant=='No'?'true':'false'}">
+                      <af:image source="/icons/dislike_new_2.png" id="image1"/>
+                      <af:outputText value="No" id="outputText9"
+                                     inlineStyle="font-weight:bold;"/>
+                    </af:panelGroupLayout>
+                  </af:column>
+                  <af:column headerText="Completion Status" id="c10"
+                             align="center" visible="false">
+                    <af:outputText value="#{row.CompletionStatusCommercial}"
+                                   id="ot7" visible="false"/>
+                    <af:panelGroupLayout id="panelGroupLayout2"
+                                         layout="horizontal"
+                                         visible="#{row.CompletionStatusCommercial=='Yes'?'true':'false'}">
+                      <af:activeImage source="/icons/ok-2.png"
+                                      id="activeImage1"/>
+                      <af:outputText value="Yes" id="outputText2"
+                                     inlineStyle="font-weight:bold;"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="panelGroupLayout1"
+                                         layout="horizontal"
+                                         visible="#{row.CompletionStatusCommercial=='No'?'true':'false'}">
+                      <af:image source="/icons/dislike_new_2.png" id="image2"/>
+                      <af:outputText value="No" id="outputText1"
+                                     inlineStyle="font-weight:bold;"/>
+                    </af:panelGroupLayout>
+                  </af:column>
+                  <af:column id="c4" headerText="Delete" align="center"
+                             width="60">
+                    <af:commandButton actionListener="#{bindings.Delete.execute}"
+                                      disabled="#{!bindings.Delete.enabled}"
+                                      id="cb3"
+                                      icon="/icons/delete bin red new.png"
+                                      partialSubmit="true" visible="false"/>
+                    <af:commandImageLink id="cil1"
+                                         icon="/icons/delete bin red new.png"
+                                         shortDesc="Click to delete the row"
+                                         partialSubmit="true"
+                                         actionListener="#{bindings.Delete.execute}"
+                                         disabled="#{!bindings.Delete.enabled}"
+                                         text="Delete " iconPosition="trailing"/>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </af:showDetailItem>
+            <af:showDetailItem id="sdi2" text="Completed" inflexibleHeight="50">
+              <af:panelGroupLayout id="panelGroupLayout9" layout="horizontal"
+                                   halign="center"
+                                   inlineStyle="font-size:15px; color:Navy; font-weight:bold;"
+                                   partialTriggers="pc2:t3">
+                <af:outputText value="Total" id="outputText3"
+                               inlineStyle="font-size:15px; color:Black; font-weight:bold;"/>
+                <af:spacer width="5" height="10" id="spacer2"/>
+                <af:outputText id="outputText4"
+                               inlineStyle="font-size:24px; font-weight:bold; color:rgb(115,198,0);"
+                               value="#{bindings.MnjCourierInformationHeaderViewOnly1Iterator.estimatedRowCount}"/>
+                <af:spacer width="5" height="10" id="spacer3"/>
+                <af:outputText value="Completed" id="outputText5"
+                               inlineStyle="font-size:15px; color:Black; font-weight:bold;"/>
+              </af:panelGroupLayout>
+              <af:panelCollection id="pc2" styleClass="AFStretchWidth"
+                                  inlineStyle="height:405.0px;">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="statusbar"/>
+                <af:table value="#{bindings.MnjCourierInformationHeaderViewOnly1.collectionModel}"
+                          var="row"
+                          rows="#{bindings.MnjCourierInformationHeaderViewOnly1.rangeSize}"
+                          emptyText="#{bindings.MnjCourierInformationHeaderViewOnly1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.MnjCourierInformationHeaderViewOnly1.rangeSize}"
+                          rowBandingInterval="0"
+                          filterModel="#{bindings.MnjCourierInformationHeaderViewOnly1Query.queryDescriptor}"
+                          queryListener="#{bindings.MnjCourierInformationHeaderViewOnly1Query.processQuery}"
+                          filterVisible="true" varStatus="vs"
+                          selectedRowKeys="#{bindings.MnjCourierInformationHeaderViewOnly1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.MnjCourierInformationHeaderViewOnly1.collectionModel.makeCurrent}"
+                          rowSelection="single" id="t3">
+                  <af:column sortProperty="DocNo" filterable="true"
+                             sortable="true"
+                             headerText="Courier Doc No."
+                             id="c22" align="center" width="50">
+                    <af:outputText value="#{row.DocNo}" id="ot13"
+                                   visible="false">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.MnjCourierInformationHeaderViewOnly1.hints.DocNo.format}"/>
+                    </af:outputText>
+                    <af:commandLink text="#{row.DocNo}" id="cl2"
+                                    action="*gotoSearchPG"
+                                    inlineStyle="font-weight:bold;"/>
+                  </af:column>
+                  <af:column sortProperty="ImportExport" filterable="true"
+                             sortable="true"
+                             headerText="Courier Type"
+                             id="c20" align="center"
+                             filterFeatures="caseInsensitive" width="50">
+                    <af:outputText value="#{row.ImportExport}" id="ot18"/>
+                  </af:column>
+                  <af:column sortProperty="ImportAwbNo" filterable="true"
+                             sortable="true"
+                             headerText="Import AWB No."
+                             id="c18" align="center" width="250"
+                             filterFeatures="caseInsensitive">
+                    <af:outputText value="#{row.ImportAwbNo}" id="ot12"/>
+                  </af:column>
+                  <af:column sortProperty="ExportAwbNo" filterable="true"
+                             sortable="true"
+                             headerText="Export AWB No."
+                             id="c14" align="center" width="250"
+                             visible="#{sessionScope.respId=='51318'? 'false':'true'}"
+                             filterFeatures="caseInsensitive">
+                    <af:outputText value="#{row.ExportAwbNo}" id="ot17"/>
+                  </af:column>
+                  <af:column sortProperty="CreationDate" filterable="true"
+                             sortable="true"
+                             headerText="Creation Date"
+                             id="c19" align="center">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.CreationDate}"
+                                    id="id3"/>
+                    </f:facet>
+                    <af:outputText value="#{row.CreationDate}" id="ot16">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationHeaderViewOnly1.hints.CreationDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="CreatorName" filterable="true"
+                             sortable="true"
+                             headerText="Creator Name"
+                             id="c23" align="center"
+                             filterFeatures="caseInsensitive">
+                    <af:outputText value="#{row.CreatorName}" id="ot14"/>
+                  </af:column>
+                  <af:column sortProperty="LastUpdateDate" filterable="true"
+                             sortable="true"
+                             headerText="Last Update Date"
+                             id="c15" align="center">
+                    <f:facet name="filter">
+                      <af:inputDate value="#{vs.filterCriteria.LastUpdateDate}"
+                                    id="id4"/>
+                    </f:facet>
+                    <af:outputText value="#{row.LastUpdateDate}" id="ot19">
+                      <af:convertDateTime pattern="#{bindings.MnjCourierInformationHeaderViewOnly1.hints.LastUpdateDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="UpdaterName" filterable="true"
+                             sortable="true"
+                             headerText="Updater Name"
+                             id="c16" align="center"
+                             filterFeatures="caseInsensitive">
+                    <af:outputText value="#{row.UpdaterName}" id="ot20"/>
+                  </af:column>
+                  <af:column sortProperty="CompletionStatusMerchant"
+                             filterable="true" sortable="true"
+                             headerText="#{bindings.MnjCourierInformationHeaderViewOnly1.hints.CompletionStatusMerchant.label}"
+                             id="c21" visible="false">
+                    <af:outputText value="#{row.CompletionStatusMerchant}"
+                                   id="ot11"/>
+                  </af:column>
+                  <af:column sortProperty="CompletionStatusCommercial"
+                             filterable="true" sortable="true"
+                             headerText="#{bindings.MnjCourierInformationHeaderViewOnly1.hints.CompletionStatusCommercial.label}"
+                             id="c17" visible="false">
+                    <af:outputText value="#{row.CompletionStatusCommercial}"
+                                   id="ot15"/>
+                  </af:column>
+                  <af:column id="column2" headerText="Status" align="center"
+                             visible="#{sessionScope.respId=='51318'? 'false':'true'}">
+                    <af:panelGroupLayout id="panelGroupLayout7"
+                                         layout="horizontal"
+                                         visible="#{row.CompletionStatusMerchant=='No'?'true':'false'}">
+                      <af:icon name="warning" id="icon2"/>
+                      <af:commandImageLink text="Pending"
+                                           id="commandImageLink3"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="panelGroupLayout8"
+                                         layout="horizontal"
+                                         visible="#{row.CompletionStatusMerchant=='Yes'?'true':'false'}">
+                      <af:image source="/icons/ok_new.png" id="image4"/>
+                      <af:commandImageLink text="Completed"
+                                           id="commandImageLink4"/>
+                    </af:panelGroupLayout>
+                  </af:column>
+                  <af:column id="column1" headerText="Status" align="center"
+                             visible="#{sessionScope.respId=='51159' or sessionScope.respId=='52666' ? 'false':'true'}">
+                    <af:panelGroupLayout id="panelGroupLayout5"
+                                         layout="horizontal"
+                                         visible="#{row.CompletionStatusCommercial=='No'?'true':'false'}">
+                      <af:icon name="warning" id="icon1"/>
+                      <af:commandImageLink text="Pending"
+                                           id="commandImageLink1"/>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="panelGroupLayout6"
+                                         layout="horizontal"
+                                         visible="#{row.CompletionStatusCommercial=='Yes'?'true':'false'}">
+                      <af:image source="/icons/ok_new.png" id="image3"/>
+                      <af:commandImageLink text="Completed"
+                                           id="commandImageLink2"/>
+                    </af:panelGroupLayout>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </af:showDetailItem>
+          </af:panelTabbed>
+        </af:panelHeader>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>
